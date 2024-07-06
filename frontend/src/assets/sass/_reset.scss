@@ -1,0 +1,72 @@
+@charset "UTF-8";
+:root {
+  --black: #000000;
+  --tipo-principal: 'Open Sans', sans-serif;
+  --tipo-secundaria: 'Roboto';
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+svg {
+    width: max-content;
+    display: block;
+    fill: currentColor;
+}
+
+body {
+    height: 100%;
+    font-size: 100%;
+    font-family: var(--tipo-principal);
+    background-color: #F4F4F9;
+    color: var(--black);
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, iframe, figure {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    font-size: inherit;
+}
+
+p a {
+    display: inline;
+}
+
+li {
+    list-style-type: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, blockquote, i, b, u, em {
+    font-size: 1em;
+    font-weight: inherit;
+    font-style: inherit;
+    text-decoration: none;
+    color: inherit;
+}
+
+form, input, textarea, select, button, label {
+    font-family: inherit;
+    font-size: inherit;
+    hyphens: auto;
+    display: block;
+}
+
+button {
+    font-weight: bold;
+}
