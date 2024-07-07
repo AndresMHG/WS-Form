@@ -1,7 +1,7 @@
 <template>
   <div class="form-step">
     <div class="form-step__header">
-      <span>Etapa <span class="form-step__header--step-number">3</span> de 4</span>
+      <p>Etapa <span>3</span> de 4 </p>
       <h2>Sua senha</h2>
     </div>
     <div class="form-step__body">
@@ -28,6 +28,9 @@
 <script setup>
 import { defineProps, defineEmits, ref } from 'vue';
 import WsInputBase from '@/components/WsInputBase/WsInputBase.vue';
+import { useNotification } from '@/composables/useNotification';
+
+const { addNotification } = useNotification();
 
 const props = defineProps({
   next: {
@@ -64,6 +67,7 @@ const validateForm = () => {
   if (!passwordInput.value.validate()) {
     isValid = false;
   }
+  if(!isValid) addNotification('warning', 'É necessário inserir uma senha')
 
   return isValid;
 };

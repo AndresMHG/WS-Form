@@ -1,8 +1,8 @@
 <template>
   <div class="form-step">
     <div class="form-step__header">
-      <span>Etapa <span class="form-step__header--step-number">1</span> de 4 </span>
-      <h2>Seja bem vindo(a)</h2>
+      <p>Etapa <span>1</span> de 4 </p>
+      <h1>Seja bem vindo(a)</h1>
     </div>
     <div class="form-step__body">
       <form @submit.prevent="handleSubmit">
@@ -29,6 +29,10 @@
 import { defineProps, defineEmits, ref } from 'vue';
 import WsInputBase from '@/components/WsInputBase/WsInputBase.vue';
 import WsTypeSelector from '@/components/WsTypeSelector/WsTypeSelector.vue';
+import { useNotification } from '@/composables/useNotification';
+
+const { addNotification } = useNotification();
+
 
 const props = defineProps({
   next: {
@@ -62,6 +66,8 @@ const validateForm = () => {
   if (!localForm.value.type) {
     isValid = false;
   }
+
+  if(!isValid) addNotification('warning', 'Todos os campos são obrigatórios')
 
   return isValid;
 };

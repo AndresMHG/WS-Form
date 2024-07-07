@@ -20,14 +20,15 @@
         &__header {
             text-align: center;
             margin: 10px 0;
-            span {
+            p {
                 color: #999;
                 margin-bottom: 0.5rem;
-                &--step-number {
+                span{
+                    font-weight: bold;
                     color: orange;
                 }
             }
-            h2 {
+            h1 {
                 margin: 10px 0;
                 font-size: 1.5rem;
                 color: #333;

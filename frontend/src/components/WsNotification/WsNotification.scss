@@ -1,0 +1,53 @@
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    &__notification {
+      padding: 15px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      animation: fade-in-out 5s forwards;
+  
+      &--success {
+        background-color: #4caf50;
+      }
+  
+      &--error {
+        background-color: #f44336;
+      }
+  
+      &--warning {
+        background-color: #ff9800;
+      }
+  
+      &--info {
+        background-color: #2196f3;
+      }
+    }
+  }
+  
+  @keyframes fade-in-out {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    10% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+  

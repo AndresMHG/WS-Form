@@ -5,9 +5,14 @@ import WsStepIndividual from '@/components/WsStep/WsStepIndividual/WsStepIndivid
 import WsStepBusiness from '@/components/WsStep/WsStepBusiness/WsStepBusiness.vue'
 import WsStepPassword from '@/components/WsStep/WsStepPassword/WsStepPassword.vue'
 import WsStepReview from '@/components/WsStep/WsStepReview/WsStepReview.vue'
+
+//Composables
+import { useNotification } from '@/composables/useNotification';
 import { useApi } from '@/composables/useApi';
 
 const { apiFetch } = useApi();
+const { addNotification } = useNotification();
+
 
 
 const form = ref({
@@ -68,20 +73,31 @@ const updateForm = (newForm) => {
 
 const result = ref(null)
 const submitForm = async () => {
-  const data = {
-    'email': form.value.email,
-    'type': form.value.type,
-    'password': form.value.password,
-  }
+  const { email, type, password, data } = form.value;
+  const { name, cpf, birthdate, phone, companyName, cnpj, companyOpeningDate } = data;
+  const formData = {
+    email,
+    type,
+    password,
+    name,
+    cpf,
+    birthdate,
+    phone,
+    companyName,
+    cnpj,
+    companyOpeningDate
+  };
   try {
     result.value = await apiFetch('/registration',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(formData)
     });
+    addNotification('success', 'Dados enviados com sucesso!');
   } catch (err) {
+    addNotification('error', 'Erro ao enviar dados!');
     console.error('Error fetching registrations:', err);
   }
 };

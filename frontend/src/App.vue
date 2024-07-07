@@ -4,6 +4,7 @@ import { useApi } from '@/composables/useApi';
 
 import WsHeader from '@/components/WsHeader/WsHeader.vue';
 import WsStep from '@/components/WsStep/WsStep.vue'
+import WsNotification from '@/components/WsNotification/WsNotification.vue'
 
 const { apiFetch } = useApi();
 
@@ -24,6 +25,7 @@ onMounted(()=> fetchRegistrations() )
 <template>
   <WsHeader />
   <main>
+    <WsNotification />
     <WsStep />
   </main>
 </template>

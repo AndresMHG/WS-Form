@@ -1,70 +1,36 @@
 <template>
     <div class="form-step">
       <div class="form-step__header">
-        <span>Etapa <span class="form-step__header--step-number">4</span> de 4</span>
+        <p>Etapa <span>4</span> de 4</p>
         <h2>Revisão dos Dados</h2>
       </div>
       <div class="form-step__body">
         <form @submit.prevent="handleSubmit">
-            <WsInputBase
-            v-if="localForm.type === 'individual'"
+          <WsInputBase
             ref="nameInput"
-            id="name"
-            label="Nome"
+            :id="nameField.id"
+            :label="nameField.label"
             type="text"
-            v-model="localForm.data.name"
+            v-model="nameField.model"
             :required="true"
           />
           <WsInputBase
-            v-if="localForm.type === 'business'"
-            label="Nome da Empresa"
-            placeholder="Nome da Empresa"
-            ref="nameInput"
-            id="name"
+            ref="cpfCnpjInput"
+            :id="cpfCnpjField.id"
+            :label="cpfCnpjField.label"
             type="text"
-            v-model="localForm.data.companyName"
+            v-model="cpfCnpjField.model"
             :required="true"
+            :pattern="cpfCnpjField.pattern"
+            :mask="cpfCnpjField.mask"
+            :maxlength="cpfCnpjField.maxlength"
           />
           <WsInputBase
-            v-if="localForm.type === 'individual'"
-            ref="cpfInput"
-            id="cpf"
-            label="CPF"
-            type="text"
-            v-model="localForm.data.cpf"
-            :required="true"
-            :pattern="'\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}'"
-            :mask="maskCPF"
-            :maxlength="14"
-          />
-          <WsInputBase
-            v-if="localForm.type === 'business'"
-            ref="cnpjInput"
-            id="cnpj"
-            label="CNPJ"
-            type="text"
-            v-model="localForm.data.cnpj"
-            :required="true"
-            :pattern="'\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}'"
-            :mask="maskCNPJ"
-            :maxlength="18"
-          />
-          <WsInputBase
-          v-if="localForm.type === 'individual'"
             ref="birthdateInput"
             id="birthdate"
             label="Data de Nascimento"
             type="date"
-            v-model="localForm.data.birthdate"
-            :required="true"
-          />
-          <WsInputBase
-            v-if="localForm.type === 'business'"
-            ref="birthdateInput"
-            id="birthdate"
-            label="Data de Nascimento"
-            type="date"
-            v-model="localForm.data.companyOpeningDate"
+            v-model="birthdateField"
             :required="true"
           />
           <WsInputBase
@@ -96,9 +62,14 @@
     </div>
   </template>
   
+  
   <script setup>
-  import { defineProps, defineEmits, ref, inject } from 'vue';
+  import { defineProps, defineEmits, ref, inject, computed } from 'vue';
   import WsInputBase from '@/components/WsInputBase/WsInputBase.vue';
+  import { useNotification } from '@/composables/useNotification';
+
+
+  const { addNotification } = useNotification();
   
   const props = defineProps({
     next: {
@@ -120,16 +91,13 @@
   });
   
   const emit = defineEmits(['update:form']);
-
-  const postRegister = inject('submitFormApi')
-
   
+  const postRegister = inject('submitFormApi')
   
   const localForm = ref({ ...props.form });
   
   const nameInput = ref(null);
-  const cpfInput = ref(null);
-  const cnpjInput = ref(null);
+  const cpfCnpjInput = ref(null);
   const birthdateInput = ref(null);
   const phoneInput = ref(null);
   const emailInput = ref(null);
@@ -157,14 +125,58 @@
       .replace(/(\d{4,5})(\d{4})$/, '$1-$2'); // Aplica el guion
   };
   
+  const nameField = computed(() => {
+    if (localForm.value.type === 'individual') {
+      return {
+        id: 'name',
+        label: 'Nome',
+        model: localForm.value.data.name
+      };
+    } else {
+      return {
+        id: 'name',
+        label: 'Nome da Empresa',
+        model: localForm.value.data.companyName,
+        placeholder: 'Nome da Empresa'
+      };
+    }
+  });
+  
+  const cpfCnpjField = computed(() => {
+    if (localForm.value.type === 'individual') {
+      return {
+        id: 'cpf',
+        label: 'CPF',
+        model: localForm.value.data.cpf,
+        pattern: '\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}',
+        mask: maskCPF,
+        maxlength: 14
+      };
+    } else {
+      return {
+        id: 'cnpj',
+        label: 'CNPJ',
+        model: localForm.value.data.cnpj,
+        pattern: '\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}',
+        mask: maskCNPJ,
+        maxlength: 18
+      };
+    }
+  });
+  
+  const birthdateField = computed(() => {
+    return localForm.value.type === 'individual'
+      ? localForm.value.data.birthdate
+      : localForm.value.data.companyOpeningDate;
+  });
+  
   const validateForm = () => {
     let isValid = true;
   
     // Validate all inputs
     const inputs = [
       nameInput.value,
-      cpfInput.value,
-      cnpjInput.value,
+      cpfCnpjInput.value,
       birthdateInput.value,
       phoneInput.value,
       emailInput.value
@@ -174,7 +186,9 @@
         isValid = false;
       }
     });
-  
+
+    if(!isValid) addNotification('warning', 'Todos os campos são obrigatórios')
+
     return isValid;
   };
   
@@ -186,3 +200,4 @@
     }
   };
   </script>
+  
