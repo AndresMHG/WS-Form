@@ -209,6 +209,8 @@ Para contribuir com este projeto, por favor, siga os passos padrão de fork, clo
 Este README.md fornece uma descrição geral do projeto, instruções de instalação, uso e contribuição, bem como informações sobre a estrutura do projeto e as principais características.
 
 ### Images
+ - Imagens descritivas do front end do projeto mas não é tudo que o projeto inclui, existem validações, interações, casos onde não será possível mostrar em poucas imagens.
+ 
 ![Loading App](frontend/src/assets/img/image01.png)
 ![Step 1](frontend/src/assets/img/image02.png)
 ![Step 1 Error](frontend/src/assets/img/image03.png)
