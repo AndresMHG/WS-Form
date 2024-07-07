@@ -1,7 +1,7 @@
 <template>
   <div class="form-step">
     <div class="form-step__header">
-      <p>Etapa <span>3</span> de 4 </p>
+      <span>Etapa <strong>3</strong> de 4 </span>
       <h2>Sua senha</h2>
     </div>
     <div class="form-step__body">

@@ -20,11 +20,10 @@
         &__header {
             text-align: center;
             margin: 10px 0;
-            p {
+            span {
                 color: #999;
                 margin-bottom: 0.5rem;
-                span{
-                    font-weight: bold;
+                strong{
                     color: orange;
                 }
             }
