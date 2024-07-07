@@ -2,7 +2,7 @@
     <header class="header">
       <div class="header-logo">
         <!--ICON LOGO-->
-        <router-link to="/">DESAFIO MB WEB</router-link>
+        <router-link to="/">Welcome to the WS form</router-link>
       </div>
     </header>
   </template>
