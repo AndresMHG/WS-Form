@@ -97,7 +97,7 @@ A validação dos campos é básica e pode ser expandida conforme necessário.
 
 ##### FRONTEND DOCUMENTATION
 
-### Frontend Project
+# Frontend - MB Web Challenge
 
 Este es el frontend de un sistema de registro de usuarios que utiliza Vue 3 con componentes escalables y estructurados. El proyecto sigue la metodología BEM para la nomenclatura de las clases CSS y está configurado con un servidor Express en el backend.
 

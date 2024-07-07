@@ -63,6 +63,7 @@ Recebe os dados de cadastro submetidos pelo usuário em formato JSON e responde 
 ### Exemplo de Resposta [POST] /registration
 
 {
+  "status": "success",
   "message": "Registration successful"
 }
 
