@@ -208,6 +208,15 @@ Para contribuir com este projeto, por favor, siga os passos padrão de fork, clo
 
 Este README.md fornece uma descrição geral do projeto, instruções de instalação, uso e contribuição, bem como informações sobre a estrutura do projeto e as principais características.
 
+### Images
+![Loading App](frontend/src/assets/img/image01.png)
+![Step 1](frontend/src/assets/img/image02.png)
+![Step 1 Error](frontend/src/assets/img/image03.png)
+![Step 1 Succes](frontend/src/assets/img/image04.png)
+![Step 2](frontend/src/assets/img/image05.png)
+![Step 3](frontend/src/assets/img/image06.png)
+![Step 4](frontend/src/assets/img/image07.png)
+
 ### Autor
 
 Andres MHG

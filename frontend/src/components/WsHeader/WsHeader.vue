@@ -2,7 +2,7 @@
     <header class="header">
       <div class="header-logo">
         <!--ICON LOGO-->
-        <router-link to="/">Welcome to the WS form</router-link>
+        <router-link to="/"><strong>Welcome to the WS-Form</strong></router-link>
       </div>
     </header>
   </template>
