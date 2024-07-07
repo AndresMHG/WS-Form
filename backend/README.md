@@ -4,6 +4,7 @@ Este é o backend para o desafio MB Web. O objetivo deste backend é servir uma 
 
 ## Estrutura do Projeto
 
+```plaintext
 backend/
 ├── node_modules/
 ├── src/
@@ -13,7 +14,7 @@ backend/
 ├── package.json
 ├── README.md
 └── .gitignore
-
+```
 ### Arquivos Principais
 
 - `src/index.js`: Arquivo principal do servidor Node.js com Express.

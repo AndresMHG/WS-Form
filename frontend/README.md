@@ -44,7 +44,7 @@ frontend
 ├── App.vue
 ├── main.js
 └── README.md
-
+```
 ### Instalação
 
 - Clonar o repositório.
