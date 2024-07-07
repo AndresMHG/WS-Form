@@ -1,4 +1,4 @@
-# desafio-mb-web-andres
+# Welcome to the WS-form
 
 ## Overview
 Este repositório contém um aplicativo web de registro de usuário com um frontend Vue.js e um backend Node.js.
@@ -24,7 +24,7 @@ Este repositório contém um aplicativo web de registro de usuário com um front
 
 # Backend - MB Web Challenge
 
-Este é o backend para o desafio MB Web. O objetivo deste backend é servir uma aplicação básica que renderiza um formulário de cadastro e recebe os dados submetidos pelo usuário.
+O objetivo deste backend é servir uma aplicação básica que renderiza um formulário de cadastro e recebe os dados submetidos pelo usuário.
 
 ## Estrutura do Projeto
 
