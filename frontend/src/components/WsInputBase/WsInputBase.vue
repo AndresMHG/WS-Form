@@ -5,9 +5,11 @@
       :id="id"
       :type="type"
       v-model="inputValue"
+      :placeholder="placeholder"
       @blur="validate"
-      @input="validate"
+      @input="handleInput"
       :class="{ error: hasError }"
+      :maxlength="maxlength"
     />
     <span v-if="hasError" class="error-message">{{ errorMessage }}</span>
   </div>
@@ -43,6 +45,18 @@ const props = defineProps({
   },
   customValidator: {
     type: Function,
+    default: null
+  },
+  mask: {
+    type: Function,
+    default: null
+  },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  maxlength: {
+    type: Number,
     default: null
   }
 });
@@ -86,6 +100,16 @@ const validate = () => {
   }
 
   return true;
+};
+
+const handleInput = (event) => {
+  let value = event.target.value;
+
+  if (props.mask) {
+    value = props.mask(value);
+  }
+
+  inputValue.value = value;
 };
 
 defineExpose({ validate });

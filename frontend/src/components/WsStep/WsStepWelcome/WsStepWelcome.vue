@@ -11,6 +11,7 @@
           id="email"
           label="Endereço de e-mail"
           type="email"
+          placeholder="teste@gmail.com"
           v-model="localForm.email"
           :required="true"
           :pattern="'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'"

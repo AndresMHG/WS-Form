@@ -1,10 +1,14 @@
 <script setup>
-import { ref, computed, markRaw } from 'vue';
+import { ref, computed, markRaw, provide } from 'vue';
 import WsWelcome from '@/components/WsStep/WsStepWelcome/WsStepWelcome.vue'
 import WsStepIndividual from '@/components/WsStep/WsStepIndividual/WsStepIndividual.vue'
 import WsStepBusiness from '@/components/WsStep/WsStepBusiness/WsStepBusiness.vue'
 import WsStepPassword from '@/components/WsStep/WsStepPassword/WsStepPassword.vue'
 import WsStepReview from '@/components/WsStep/WsStepReview/WsStepReview.vue'
+import { useApi } from '@/composables/useApi';
+
+const { apiFetch } = useApi();
+
 
 const form = ref({
   email: '',
@@ -62,10 +66,34 @@ const updateForm = (newForm) => {
   form.value = newForm;
 };
 
+const result = ref(null)
+const submitForm = async () => {
+  const data = {
+    'email': form.value.email,
+    'type': form.value.type,
+    'password': form.value.password,
+  }
+  try {
+    result.value = await apiFetch('/registration',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.error('Error fetching registrations:', err);
+  }
+};
+
+
+provide('submitFormApi', submitForm)
 </script>
 
 <template>
   <div class="step-container">
-    <component :is="currentStepComponent" :prev="prevStep" :next="nextStep" :form="form"  @update:form="updateForm"/> 
+    <transition name="fade" mode="out-in">
+      <component :is="currentStepComponent" :key="currentStep" :prev="prevStep" :next="nextStep" :form="form" @update:form="updateForm" />
+    </transition>  
   </div>
 </template>

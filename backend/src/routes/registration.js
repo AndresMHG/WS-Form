@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log('req.body', req.body); // Verifica que `req.body` tiene los datos correctos
   const { email, type, name, cpf, birthdate, phone, companyName, cnpj, companyOpeningDate, password } = req.body;
 
   if (!email || !type || !password) {

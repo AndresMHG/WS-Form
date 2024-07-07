@@ -1,19 +1,33 @@
 <template>
-  <div>
-    <h2>Set Password</h2>
-    <form @submit.prevent="handleSubmit">
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="localForm.password" required />
-      </div>
-      <button type="button" @click="props.prev">Back</button>
-      <button type="submit">Next</button>
-    </form>
+  <div class="form-step">
+    <div class="form-step__header">
+      <span>Etapa <span class="form-step__header--step-number">3</span> de 4</span>
+      <h2>Sua senha</h2>
+    </div>
+    <div class="form-step__body">
+      <form @submit.prevent="handleSubmit">
+        <WsInputBase
+          ref="passwordInput"
+          id="password"
+          label="Senha"
+          placeholder="Digite sua senha"
+          type="password"
+          v-model="localForm.password"
+          :required="true"
+          :custom-validator="validatePassword"
+        />
+        <div class="form-step__footer">
+          <button class="form-step__footer--button-prev" type="button" @click="props.prev">Voltar</button>
+          <button class="form-step__footer--button-next" type="submit">Continuar</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref, watch } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue';
+import WsInputBase from '@/components/WsInputBase/WsInputBase.vue';
 
 const props = defineProps({
   next: {
@@ -34,15 +48,30 @@ const emit = defineEmits(['update:form']);
 
 const localForm = ref({ ...props.form });
 
-watch(localForm, (newForm) => {
-  emit('update:form', newForm);
-}, { deep: true });
+const passwordInput = ref(null);
+
+const validatePassword = (value) => {
+  if (value.length < 8) {
+    return 'A senha deve ter pelo menos 8 caracteres.';
+  }
+  return '';
+};
+
+const validateForm = () => {
+  let isValid = true;
+
+  // Validate password input
+  if (!passwordInput.value.validate()) {
+    isValid = false;
+  }
+
+  return isValid;
+};
 
 const handleSubmit = () => {
-  props.next();
+  if (validateForm()) {
+    emit('update:form', localForm.value);
+    props.next();
+  }
 };
 </script>
-
-<style scoped>
-/* Your styles here */
-</style>

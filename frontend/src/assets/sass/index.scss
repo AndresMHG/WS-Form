@@ -55,11 +55,20 @@
                 color: white;
             }
             &--button-prev {
-                margin-left: 20px;
+                margin-right: 20px;
                 background-color: white;
                 border: 1px solid orange;
                 color: orange;
+                max-width: 130px;
             }
         }
     }
+}
+
+/* Add transition styles */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s;
+  }
+.fade-enter-from, .fade-leave-to {
+opacity: 0;
 }

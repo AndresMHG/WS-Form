@@ -10,25 +10,29 @@
             ref="nameInput"
             id="name"
             label="Nome"
+            placeholder="Nome"
             type="text"
-            v-model="localForm.name"
+            v-model="localForm.data.name"
             :required="true"
           />
           <WsInputBase
             ref="cpfInput"
             id="cpf"
             label="CPF"
+            placeholder="000-000-000-00"
             type="text"
-            v-model="localForm.cpf"
+            v-model="localForm.data.cpf"
             :required="true"
             :pattern="'\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}'"
+            :mask="maskCPF"
+            :maxlength="14"
           />
           <WsInputBase
             ref="birthdateInput"
             id="birthdate"
             label="Data de Nascimento"
             type="date"
-            v-model="localForm.birthdate"
+            v-model="localForm.data.birthdate"
             :required="true"
           />
           <WsInputBase
@@ -36,9 +40,12 @@
             id="phone"
             label="Número de Telefone"
             type="text"
-            v-model="localForm.phone"
+            placeholder="(99) 99999-9999"
+            v-model="localForm.data.phone"
             :required="true"
             :pattern="'\\(\\d{2}\\) \\d{4,5}-\\d{4}'"
+            :mask="maskPhone"
+            :maxlength="15"
           />
           <div class="form-step__footer">
             <button class="form-step__footer--button-prev" type="button" @click="props.prev">Voltar</button>
@@ -77,6 +84,21 @@
   const birthdateInput = ref(null);
   const phoneInput = ref(null);
   
+  const maskCPF = (value) => {
+    return value
+      .replace(/\D/g, '') // Elimina cualquier carácter que no sea número
+      .replace(/(\d{3})(\d)/, '$1.$2') // Aplica el primer punto
+      .replace(/(\d{3})(\d)/, '$1.$2') // Aplica el segundo punto
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Aplica el guion
+  };
+  
+  const maskPhone = (value) => {
+    return value
+      .replace(/\D/g, '') // Elimina cualquier carácter que no sea número
+      .replace(/(\d{2})(\d)/, '($1) $2') // Aplica los paréntesis y el espacio
+      .replace(/(\d{4,5})(\d{4})$/, '$1-$2'); // Aplica el guion
+  };
+  
   const validateForm = () => {
     let isValid = true;
   
@@ -110,3 +132,4 @@
     }
   };
   </script>
+  
