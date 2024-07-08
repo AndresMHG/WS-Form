@@ -15,7 +15,7 @@ const { addNotification } = useNotification();
 
 
 
-const form = ref({
+const defaultForm = {
   email: '',
   type: '', // 'individual' or 'business'
   data: {
@@ -28,7 +28,9 @@ const form = ref({
     companyOpeningDate: ''
   },
   password: ''
-});
+};
+
+const form = ref({ ...defaultForm });
 
 const RawWsStepWelcome = markRaw(WsWelcome);
 const RawWsStepIndividual = markRaw(WsStepIndividual);
@@ -96,14 +98,21 @@ const submitForm = async () => {
       body: JSON.stringify(formData)
     });
     addNotification('success', 'Dados enviados com sucesso!');
+    resetForm()
   } catch (err) {
     addNotification('error', 'Erro ao enviar dados!');
     console.error('Error fetching registrations:', err);
   }
 };
 
+const resetForm = () => {
+  form.value = { ...defaultForm };
+  currentStep.value = 1;
+};
+
 
 provide('submitFormApi', submitForm)
+
 </script>
 
 <template>

@@ -28,9 +28,6 @@
 <script setup>
 import { defineProps, defineEmits, ref } from 'vue';
 import WsInputBase from '@/components/WsInputBase/WsInputBase.vue';
-import { useNotification } from '@/composables/useNotification';
-
-const { addNotification } = useNotification();
 
 const props = defineProps({
   next: {
@@ -67,8 +64,6 @@ const validateForm = () => {
   if (!passwordInput.value.validate()) {
     isValid = false;
   }
-  if(!isValid) addNotification('warning', 'É necessário inserir uma senha')
-
   return isValid;
 };
 
